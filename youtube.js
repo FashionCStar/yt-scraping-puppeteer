@@ -13,7 +13,7 @@ async function scrape_youtube(browser, keyword) {
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
-    await page.goto(`https://www.youtube.com/results?q=${encodeURIComponent(query)}${page ? `&page=${page}` : ''}`);
+    await page.goto(`https://www.youtube.com/results?q=${encodeURIComponent(keyword)}${page ? `&page=${page}` : ''}`);
 
     // try {
     //     await page.waitForSelector('input[id="search"]', { timeout: 5000 });
@@ -25,8 +25,8 @@ async function scrape_youtube(browser, keyword) {
 
     // before we do anything, parse the results of the front page of youtube
     // await page.waitForSelector('ytd-video-renderer,ytd-grid-video-renderer', { timeout: 10000 });
-    let html = await page.content();
-    results['__frontpage__'] = parse(html);
+    // let html = await page.content();
+    // results['__frontpage__'] = parse(html);
 
     try {
         // const input = await page.$('input[id="search"]');
