@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const fs = require('fs');
 
 module.exports = {
     scrape_youtube: scrape_youtube,
@@ -41,6 +42,11 @@ async function scrape_youtube(browser, keyword) {
         await sleep(1);
 
         let html = await page.content();
+        fs.writeFile('my-page1.html', $("#page-manager"), (error) => { 
+            console.log("errorrrrr", error); 
+            if (error) throw error;
+                console.log('saved file');
+        });
         results[keyword] = parse(html);
 
     } catch (e) {
