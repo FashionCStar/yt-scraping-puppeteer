@@ -61,8 +61,8 @@ function parse(html) {
             link: $(link).find('#video-title').attr('href'),
             title: $(link).find('#video-title').text(),
             snippet: $(link).find('#description-text').text(),
-            channel: $(link).find('#byline a').text(),
-            channel_link: $(link).find('#byline a').attr('href'),
+            channel: $(link).find('#byline-container a').text(),
+            channel_link: $(link).find('#byline-container a').attr('href'),
             num_views: $(link).find('#metadata-line span:nth-child(1)').text(),
             release_date: $(link).find('#metadata-line span:nth-child(2)').text(),
         })
