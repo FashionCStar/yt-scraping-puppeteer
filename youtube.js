@@ -13,28 +13,28 @@ async function scrape_youtube(browser, keyword) {
 
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
-    await page.goto('https://www.youtube.com');
+    await page.goto(`https://www.youtube.com/results?q=${encodeURIComponent(query)}${page ? `&page=${page}` : ''}`);
 
-    try {
-        await page.waitForSelector('input[id="search"]', { timeout: 5000 });
-    } catch (e) {
-        return results;
-    }
+    // try {
+    //     await page.waitForSelector('input[id="search"]', { timeout: 5000 });
+    // } catch (e) {
+    //     return results;
+    // }
 
     const results = {};
 
     // before we do anything, parse the results of the front page of youtube
-    await page.waitForSelector('ytd-video-renderer,ytd-grid-video-renderer', { timeout: 10000 });
+    // await page.waitForSelector('ytd-video-renderer,ytd-grid-video-renderer', { timeout: 10000 });
     let html = await page.content();
     results['__frontpage__'] = parse(html);
 
     try {
-        const input = await page.$('input[id="search"]');
-        // overwrites last text in input
-        await input.click({ clickCount: 3 });
-        await input.type(keyword);
-        await input.focus();
-        await page.keyboard.press("Enter");
+        // const input = await page.$('input[id="search"]');
+        // // overwrites last text in input
+        // await input.click({ clickCount: 3 });
+        // await input.type(keyword);
+        // await input.focus();
+        // await page.keyboard.press("Enter");
 
         await page.waitForFunction(`document.title.indexOf('${keyword}') !== -1`, { timeout: 5000 });
         await page.waitForSelector('ytd-video-renderer,ytd-grid-video-renderer', { timeout: 5000 });
